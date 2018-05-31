@@ -49,20 +49,26 @@ namespace ServerMonitor.Views
             //指定建立五个序列
             for (int i = 0; i < 5; i++)
             {
-                CategoricalSeries series = null;
+                CategoricalSeriesBase series = null;
                 if (chart == null)//若图表为null
                 {
                     return;
                 }
                 //创建指定类型的序列
-                series = new LineSeries()
+                //series = new LineSeries()
+                //{
+                //    Stroke = DefaultPalette.FillEntries.Brushes[i],
+                //    StrokeThickness = 3,
+                //    CategoryBinding = new PropertyNameDataPointBinding("RequestTime"),
+                //    ValueBinding = new PropertyNameDataPointBinding("ResponseTime"),
+                //    PointTemplate = chart.Resources["PointTemplate"] as DataTemplate
+                //};
+                series = new PointSeries()
                 {
-                    Stroke = DefaultPalette.FillEntries.Brushes[i],
-                    StrokeThickness = 3,
+                    CategoryBinding = new PropertyNameDataPointBinding("RequestTime"),
+                    ValueBinding = new PropertyNameDataPointBinding("ResponseTime"),
                     PointTemplate = chart.Resources["PointTemplate"] as DataTemplate
                 };
-                series.CategoryBinding = new PropertyNameDataPointBinding("RequestTime");
-                series.ValueBinding = new PropertyNameDataPointBinding("ResponseTime");
                 series.SetBinding(ChartSeries.ItemsSourceProperty, new Binding() { Path = new PropertyPath("Infos.LineChartCollection[" + i + "]") });
                 series.ClipToPlotArea = false;
                 //序列添加到图表

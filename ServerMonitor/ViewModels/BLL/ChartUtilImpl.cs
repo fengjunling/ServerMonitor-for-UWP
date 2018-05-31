@@ -149,6 +149,14 @@ namespace ServerMonitor.ViewModels.BLL
                     }
                     #endregion
                 }
+                if (site.Id == 6)
+                {
+                    foreach (var item in chart1Series)
+                    {
+                        Debug.WriteLine("RequestTime:{0},ResponseTime{1}", item.RequestTime, item.ResponseTime);
+                    }
+                    
+                }
                 //将统计好的结果加入到序列集合
                 chart1Collection.Add(chart1Series);
                 BarChart.Add(new BarChartData()
